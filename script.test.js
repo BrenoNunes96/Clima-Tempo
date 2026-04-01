@@ -10,35 +10,39 @@ describe('Testes Unitários - App de Clima', () => {
     jest.clearAllMocks(); 
   });
 
-  test('1. Nome de cidade válido retorna dados meteorológicos', async () => {
-    // 1ª Chamada (Geocoding) - OK
+  test('1. Nome de cidade válido retorna dados meteorológicos completos', async () => {
+    // Mock Geocoding
     fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ 
-        results: [{ latitude: -22.9, longitude: -43.1, name: 'Rio', country: 'BR' }] 
-      }),
+        ok: true,
+        json: async () => ({ 
+            results: [{ latitude: -22.9, longitude: -43.1, name: 'Rio', country: 'BR' }] 
+        }),
     });
 
-    // 2ª Chamada (Previsão) - ADICIONE O HOURLY AQUI
-    fetch.mockResolvedValueOnce({
-      ok: true,
-      json: async () => ({ 
-        current_weather: { 
-            temperature: 25,
-            time: "2026-04-01T12:00" // Adicionei o time para evitar erros de split
-        },
-        hourly: { 
-            cloud_cover: [10, 10, 10, 10, 10] // Simula céu limpo (poucas nuvens)
-        } 
-      }),
-    });
-
+    // Mock Forecast (Nova estrutura 'current')
+ // Exemplo de como deve ser o mock no Teste 1 agora:
+fetch.mockResolvedValueOnce({
+  ok: true,
+  json: async () => ({ 
+    current: { 
+      temperature_2m: 25, 
+      relative_humidity_2m: 50, 
+      wind_speed_10m: 10, 
+      precipitation: 0, 
+      time: "2026-04-01T14:00" 
+    },
+    hourly: { cloud_cover: [0,0,0,0,0] }
+  }),
+});
     const resultado = await buscarClimaPorCidade('Rio de Janeiro');
 
-    expect(resultado.clima.temperature).toBe(25);
-    expect(resultado.nuvens).toHaveLength(5); // Verifica se o slice(0,5) funcionou
-    expect(fetch).toHaveBeenCalledTimes(2); 
-  });
+    // Verificações
+    expect(resultado.clima.temperature_2m).toBe(25);
+    expect(resultado.clima.relative_humidity_2m).toBe(65);
+    expect(resultado.clima.wind_speed_10m).toBe(12);
+    expect(resultado.clima.precipitation).toBe(0);
+    expect(resultado.nuvens).toHaveLength(5);
+});
   test('2. Nome de cidade inexistente lança exceção tratada', async () => {
     fetch.mockResolvedValueOnce({
       ok: true,

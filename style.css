@@ -220,3 +220,61 @@ button:active {
     color: #4c7ad6;
     margin-bottom: 15px; /* Empurra o botão da casinha um pouco para baixo */
 }
+/* =========================================
+   Grid de Detalhes (Umidade, Vento, Chuva)
+   ========================================= */
+/* =========================================
+   Grid de Detalhes com Ícones Grandes
+   ========================================= */
+
+/* =========================================
+   Estilização dos Novos Ícones SVG
+   ========================================= */
+
+.detalhes-grid {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+    padding: 20px 10px;
+    background-color: #f7f9fc;
+    border-radius: 12px;
+    margin: 15px 0;
+    border: 1px solid #e2e8f0;
+}
+
+.item-detalhe {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px; /* Espaço entre ícone, número e legenda */
+    flex: 1;
+}
+
+/* Tamanho e Cor dos Ícones */
+.item-detalhe svg {
+    width: 32px;
+    height: 32px;
+    stroke: #4a90e2; /* Azul padrão do seu projeto */
+    stroke-width: 2;
+    fill: none;
+    transition: transform 0.2s ease;
+}
+
+/* Efeito de destaque ao passar o mouse */
+.item-detalhe:hover svg {
+    transform: translateY(-3px) scale(1.1);
+}
+
+.item-detalhe span {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: #315b83;
+}
+
+.item-detalhe small {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: #8fa0b5;
+    text-transform: uppercase;
+}
