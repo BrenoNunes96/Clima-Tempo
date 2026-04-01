@@ -1,0 +1,222 @@
+/* =========================================
+   Reset Básico e Tipografia
+   ========================================= */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+#video-fundo {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    object-fit: cover;
+    z-index: -2; /* Mudamos de -1 para -2 para ele ficar bem no fundo */
+}
+body.fundo-noite::before {
+    background-color: rgba(10, 19, 56, 0.65); 
+}
+
+body.fundovoltar::before{
+     content: ""; /* Obrigatório para pseudo-elementos */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* DEFINA A COR DO FILTRO AQUI (RGBA para transparência) */
+    /* Usei um azul celeste claro com 65% de opacidade */
+    background-color:rgba(179, 224, 255, 0.65);
+    
+    /* Z-index -1 coloca esta camada entre o vídeo (-2) e o cartão (0) */
+    z-index: -1; 
+
+}
+
+body::before {
+    content: ""; /* Obrigatório para pseudo-elementos */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    
+    /* DEFINA A COR DO FILTRO AQUI (RGBA para transparência) */
+    /* Usei um azul celeste claro com 65% de opacidade */
+    background-color:rgba(179, 224, 255, 0.65);
+    
+    /* Z-index -1 coloca esta camada entre o vídeo (-2) e o cartão (0) */
+    z-index: -1; 
+}
+#cidade-erro-container {
+    display: none; /* Lembre-se de deixar como 'none' no padrão e mudar para 'block' via JS quando der erro */
+    width: 100%;
+    margin-top: 15px; /* Dá um respiro entre a barra de busca e a mensagem */
+    padding: 14px;
+    background-color: #fee2e2; /* Fundo vermelho bem clarinho */
+    color: #b91c1c; /* Texto em vermelho escuro para dar leitura */
+    border-left: 6px solid #dc2626; /* A barrinha vermelha grossa na lateral esquerda */
+    border-radius: 8px; /* Cantos arredondados iguais aos do input */
+    font-size: 14.5px;
+    font-weight: 500;
+    text-align: center; /* Centraliza o texto */
+}
+body {
+    margin: 0;
+    min-height: 100vh; /* Garante que a página tenha a altura da tela toda */
+    display: flex;     /* Ativa o Flexbox */
+    justify-content: center; /* Centraliza na horizontal */
+    align-items: center;     /* Centraliza na vertical */
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    z-index: 1; /* Garante que o conteúdo fique sempre na frente do vídeo */
+}
+/* =========================================
+   Cartão Principal (Formulário)
+   ========================================= */
+.secaoPrincipal {
+    background-color: #ffffff;
+    padding: 50px 40px;
+    border-radius: 16px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.05); 
+    width: 100%;
+    max-width: 600px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px; 
+    width: 100%;
+}
+
+/* =========================================
+   ESTADO 1: TELA INICIAL (Antes da Busca)
+   ========================================= */
+
+/* O título principal ("Previsão do Tempo") */
+label {
+    font-size: 28px;
+    font-weight: 700;
+    color: #315b83; 
+    text-align: center;
+    width: 100%;
+    display: block;
+}
+
+.btn-input-container {
+    display: flex;
+    width: 100%;
+    gap: 12px; 
+}
+
+input {
+    flex: 1; 
+    padding: 16px 20px;
+    background-color: #f7f9fc; 
+    border: 1px solid transparent; 
+    border-radius: 8px;
+    font-size: 15px;
+    color: #4a5568;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+input::placeholder {
+    color: #8fa0b5;
+}
+
+input:focus {
+    border-color: #559bed;
+    background-color: #ffffff;
+}
+
+button {
+    background-color: #559bed;
+    color: #ffffff;
+    border: none;
+    padding: 0 32px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+button:hover {
+    background-color: #3b82f6;
+}
+
+button:active {
+    transform: scale(0.96);
+}
+
+
+.label-container {
+    background-color: #d2e3ed; 
+    border-radius: 12px;
+    width: 100%;
+    padding: 20px 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: -10px; 
+
+
+}
+
+/* O número da temperatura (criado pelo seu JS) */
+.label2 {
+    font-size: 4.5rem;
+    font-weight: 700;
+    color: #2b455e; /* Azul bem escuro para dar contraste */
+    gap: 20px;
+}
+
+/* O container que abraça o nome da cidade e a casinha (criado pelo seu JS) */
+#content-input-overflow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 25px; /* Espaço entre o nome da cidade e o botão */
+}
+
+/* O nome da cidade (criado pelo seu JS no span) */
+#content-input-overflow span {
+    font-size:2rem;
+    font-weight: 600;
+    color: #315b83;
+}
+#cloud{
+        font-size:1.0rem;
+    font-weight: 600;
+    color: #315b83;
+}
+/* O Botão quadrado da casinha (criado pelo seu JS) */
+#content-input-overflow button {
+    width: 48px;
+    height: 48px;
+    padding: 0; /* Tira o padding lateral do botão de enviar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    background-color: #559bed;
+}
+.data-clima {
+    font-size: 0.9rem;
+    font-weight: 400;
+    color: #4c7ad6;
+    margin-bottom: 15px; /* Empurra o botão da casinha um pouco para baixo */
+}
