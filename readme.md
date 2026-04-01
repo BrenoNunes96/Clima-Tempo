@@ -36,4 +36,4 @@ Os dados meteorológicos são providos pela Open-Meteo, que exige atribuição p
 
 1. Clone o repositório:
    ```bash
-   git clone [https://github.com/SEU_USUARIO/projeto_clima.git](https://github.com/SEU_USUARIO/projeto_clima.git)
+   git clone [https://github.com/SEU_USUARIO/projeto_clima.git](https://github.com/BrenoNunes96/projeto_clima.git)
