@@ -10,30 +10,30 @@ describe('Testes Unitários - App de Clima', () => {
     jest.clearAllMocks(); 
   });
 
-  test('1. Nome de cidade válido retorna dados meteorológicos completos', async () => {
-    // Mock Geocoding
+ test('1. Nome de cidade válido retorna dados meteorológicos completos', async () => {
+    // 1ª Chamada (Geocoding) - OK
     fetch.mockResolvedValueOnce({
-        ok: true,
-        json: async () => ({ 
-            results: [{ latitude: -22.9, longitude: -43.1, name: 'Rio', country: 'BR' }] 
-        }),
+      ok: true,
+      json: async () => ({ 
+        results: [{ latitude: -22.9, longitude: -43.1, name: 'Rio', country: 'BR' }] 
+      }),
     });
 
-    // Mock Forecast (Nova estrutura 'current')
- // Exemplo de como deve ser o mock no Teste 1 agora:
-fetch.mockResolvedValueOnce({
-  ok: true,
-  json: async () => ({ 
-    current: { 
-      temperature_2m: 25, 
-      relative_humidity_2m: 50, 
-      wind_speed_10m: 10, 
-      precipitation: 0, 
-      time: "2026-04-01T14:00" 
-    },
-    hourly: { cloud_cover: [0,0,0,0,0] }
-  }),
-});
+    // 2ª Chamada (Previsão) - AJUSTE OS NÚMEROS AQUI
+    fetch.mockResolvedValueOnce({
+      ok: true,
+      json: async () => ({ 
+        current: { 
+          temperature_2m: 25,
+          relative_humidity_2m: 65, // <--- Mudei para 65 para bater com o expect
+          wind_speed_10m: 12,       // <--- Mudei para 12 para bater com o expect
+          precipitation: 0,
+          time: "2026-04-01T14:00"
+        },
+        hourly: { cloud_cover: [10, 10, 10, 10, 10] } 
+      }),
+    });
+
     const resultado = await buscarClimaPorCidade('Rio de Janeiro');
 
     // Verificações
@@ -42,7 +42,7 @@ fetch.mockResolvedValueOnce({
     expect(resultado.clima.wind_speed_10m).toBe(12);
     expect(resultado.clima.precipitation).toBe(0);
     expect(resultado.nuvens).toHaveLength(5);
-});
+  });
   test('2. Nome de cidade inexistente lança exceção tratada', async () => {
     fetch.mockResolvedValueOnce({
       ok: true,

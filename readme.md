@@ -1,46 +1,39 @@
-import os
+# 🌦️ Projeto Clima - Previsão do Tempo em Tempo Real
 
-readme_content = """# 🌦️ Projeto Clima - Previsão do Tempo em Tempo Real
+Aplicação web interativa para consulta meteorológica utilizando JavaScript Vanilla. O sistema consome as APIs públicas do Open-Meteo para entregar dados precisos de localização e clima, com uma interface que reage dinamicamente ao horário e às condições climáticas.
 
-Este projeto é uma aplicação web interativa desenvolvida para fornecer informações meteorológicas detalhadas de qualquer cidade do mundo. A aplicação consome dados das APIs **Open-Meteo**, tratando desde a geolocalização até a previsão atual, com uma interface que reage dinamicamente ao horário local e às condições de nebulosidade.
+## 🚀 Funcionalidades
 
----
+* **Busca Global:** Encontre o clima de qualquer cidade do mundo através da API de Geocoding.
+* **Dashboard Completo:** Exibição de Temperatura, Umidade, Velocidade do Vento e Precipitação.
+* **Interface Dinâmica (UX):**
+  * Transição automática de fundo (Modo Dia / Modo Noite) baseada no fuso horário retornado.
+  * Status em texto ("Céu Limpo" ou "Nublado") baseado na cobertura de nuvens das próximas 5 horas.
+  * Ícones SVG escaláveis e interativos.
+* **Tratamento de Exceções:** Validação de entradas vazias, tratamento amigável para cidades não encontradas e falhas de rede.
 
-## 🚀 Funcionalidades Principais
+## 🛠️ Tecnologias Utilizadas
 
-* **Busca por Cidade:** Integração com a API de Geocoding para encontrar latitude e longitude através do nome da cidade.
-* **Previsão Detalhada:** Exibição de temperatura atual (arredondada) e status do céu.
-* **Interface Dinâmica:**
-    * **Modo Noite/Dia:** O fundo da aplicação muda automaticamente (`fundo-noite` ou `fundovoltar`) baseado no horário retornado pela API.
-    * **Status de Nuvens:** Identificação inteligente de céu nublado ou limpo através da análise das próximas 5 horas de cobertura de nuvens.
-    * **Data Formatada:** Conversão de datas ISO para o padrão brasileiro (PT-BR) com tradução manual dos meses.
-* **Tratamento de Erros:** Mensagens amigáveis para campos vazios, cidades não encontradas ou falhas de servidor.
-* **Testes Unitários:** Cobertura de lógica de negócio utilizando Mocking de APIs.
+* **Frontend:** HTML5, CSS3, JavaScript (ES6+).
+* **APIs Externas:** [Open-Meteo API](https://open-meteo.com/) (Geocoding e Forecast).
+* **Testes e Ambiente:** Node.js, Jest, JSDOM (Testes Unitários e Mocking).
+* **Ícones:** Lucide/Feather Icons (SVG).
 
----
+## 🔒 Segurança e Privacidade
 
-## 🛠️ Tech Stack
+Este projeto foi auditado e desenhado com foco em Privacy by Design:
+* **Coleta de Dados:** O sistema não utiliza a API de Geolocalização do navegador (HTML5 Geolocation). Nenhuma coordenada do usuário é rastreada ou armazenada. Apenas o nome da cidade digitada de forma ativa e voluntária pelo usuário é processada.
+* **Armazenamento:** Não utilizamos cookies, LocalStorage ou banco de dados. Os dados existem apenas na memória temporária da sessão atual.
+* **Comunicação Segura:** Todas as requisições para a API Open-Meteo são forçadas via protocolo HTTPS, garantindo a criptografia dos dados em trânsito e prevenindo ataques *Man-in-the-Middle* (MitM).
+* **Sanitização de Input:** As entradas do usuário são tratadas e codificadas (URL Encoding) antes de serem enviadas à API, prevenindo injeções de caracteres maliciosos em URLs.
 
-| Tecnologia | Descrição |
-| :--- | :--- |
-| **JavaScript (ES6+)** | Lógica principal e manipulação de DOM. |
-| **Node.js** | Ambiente de execução para ferramentas de desenvolvimento. |
-| **Jest** | Framework de testes unitários e de integração. |
-| **JSDOM** | Simulação de ambiente de navegador para testes no Node. |
-| **Open-Meteo API** | Fonte de dados geográficos e meteorológicos (Gratuita). |
+## ⚖️ Licenciamento e Atribuição
 
----
+Este projeto é distribuído sob a licença **MIT**, o que permite uso comercial, modificação e distribuição, desde que mantidos os avisos de direitos autorais. 
+Os dados meteorológicos são providos pela Open-Meteo, que exige atribuição para uso não-comercial. Consulte o arquivo `NOTICE.md` para detalhes sobre os créditos de terceiros e o arquivo `LICENSE` para os termos legais completos.
 
-## 🧪 Testes Unitários
+## 📦 Instalação e Execução
 
-O projeto utiliza o **Jest** para garantir que a lógica de busca e tratamento de dados esteja sempre íntegra, sem depender de chamadas reais à rede (uso de `Mocks`).
-
-### Casos de Teste Cobertos:
-1.  **Sucesso na Busca:** Verifica se, ao fornecer uma cidade válida, o sistema retorna a temperatura correta e os dados formatados.
-2.  **Cidade Inexistente:** Garante que o erro "Cidade inexistente" seja lançado se a API de Geocoding retornar resultados vazios.
-3.  **Validação de Entrada:** Impede o processamento se o usuário enviar o campo de busca vazio.
-4.  **Falha de API (500):** Simula uma queda no servidor da API e verifica se o sistema lida com a exceção adequadamente.
-
-**Para rodar os testes:**
-```bash
-npm test
+1. Clone o repositório:
+   ```bash
+   git clone [https://github.com/SEU_USUARIO/projeto_clima.git](https://github.com/SEU_USUARIO/projeto_clima.git)
